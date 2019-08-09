@@ -1,4 +1,3 @@
-# REDIRECT HTTP TRAFFIC TO https://[domain.com]
 server {
  	listen 80;
  	server_name sso.themainframe.co.uk;
