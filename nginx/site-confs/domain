@@ -1,55 +1,26 @@
-################################################################################################################
-#////////////////////////////////////////////////SERVER BLOCKS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
-################################################################################################################
-server  {
-    if ($host = sso.themainframe.co.uk) {
-        return 301 https://$host$request_uri;
-    } # managed by Certbot
-
-  listen  80;
-  server_name  sso.themainframe.co.uk;
-  return 301 https://$host$request_uri;
+# REDIRECT HTTP TRAFFIC TO https://[domain.com]
+server {
+ 	listen 80;
+ 	server_name sso.themainframe.co.uk;
+ 	return 301 https://$server_name$request_uri;
 }
 
-
-################################################################################################################
-#////////////////////////////////////////////////MAIN SERVER BLOCK\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
-################################################################################################################
-
+# BLOG SITE
 server {
-	listen 443 ssl default_server;
-        listen [::]:443 ssl default_server;
-  server_name sso.themainframe.co.uk;
+	listen 443 ssl http2;
+	server_name sso.themainframe.co.uk;
 
-# Organizr
-  location  / {
-    proxy_pass  http://192.168.1.249:9983/;
-  }
-
-#server {
-#	listen 443 ssl default_server;
-#	server_name sso.themainframe.co.uk;
-#
-#	#SSL settings
+#SSL settings
 	include /etc/nginx/strong-ssl.conf;
-#
-#	#Maxmind geoblock
-	include /etc/nginx/geoblock.conf;
-#
-#	#Custom error pages
-	include /etc/nginx/errorpages.conf;
-#
-#	#Organizr auth
-	include /etc/nginx/serverauth.conf;
-#
-#	#Organizr container
-#	include /etc/nginx/root.conf;
-#
   include /etc/nginx/cloudflare.conf;
-################################################################################################################
-#////////////////////////////////////////////////SUBDIRECTORIES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
-################################################################################################################
-	include /etc/nginx/subdirs/*.conf;
+  include /etc/nginx/proxy.conf;
+  include /etc/nginx/geoblock.conf;
+  include /etc/nginx/errorpages.conf;
+  include /etc/nginx/serverauth.conf;
+  include /etc/nginx/subdirs/*.conf;
 
+  location / {
+    proxy_pass http://192.168.1.249:9983/;
 
+  }
 }
