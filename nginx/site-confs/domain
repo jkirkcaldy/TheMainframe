@@ -1,0 +1,40 @@
+################################################################################################################
+#////////////////////////////////////////////////SERVER BLOCKS\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
+################################################################################################################
+# REDIRECT TRAFFIC FROM www.themainframe.co.uk TO https://themainframe.co.uk
+server {
+ 	listen 80;
+	listen 443 ssl http2;
+ 	server_name www.themainframe.co.uk;
+ 	return 301 https://sso.themainframe.co.uk$request_uri;
+}
+
+
+################################################################################################################
+#////////////////////////////////////////////////MAIN SERVER BLOCK\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
+################################################################################################################
+server {
+	listen 443 ssl http2 default_server;
+	server_name sso.themainframe.co.uk;
+
+	#SSL settings
+	include /config/nginx/strong-ssl.conf;
+
+	#Maxmind geoblock
+	include /config/nginx/geoblock.conf;
+
+	#Custom error pages
+	include /config/nginx/errorpages.conf;
+
+	#Organizr auth
+	include /config/nginx/serverauth.conf;
+
+	#Organizr container
+	include /config/nginx/root.conf;
+
+  include /etc/nginx/config/cloudflare.conf;
+################################################################################################################
+#////////////////////////////////////////////////SUBDIRECTORIES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
+################################################################################################################
+	include /config/nginx/subdirs/*.conf;
+}
