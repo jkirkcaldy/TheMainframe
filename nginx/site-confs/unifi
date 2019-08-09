@@ -48,7 +48,7 @@ server {
 
   include /etc/nginx/cloudflare.conf;
 
-  include /etc/nginx/etc/nginxssl.conf;
+  include /etc/nginx/ssl.conf;
 
 
         # Logs
