@@ -11,7 +11,7 @@ server {
 	server_name sso.themainframe.co.uk;
 
 #SSL settings
-	include /etc/nginx/strong-ssl.conf;
+	include /etc/nginx/ssl.conf;
   include /etc/nginx/cloudflare.conf;
   include /etc/nginx/proxy.conf;
   include /etc/nginx/geoblock.conf;
