@@ -19,9 +19,9 @@ server {
 	server_name blog.themainframe.co.uk;
 
 #SSL settings
-	include /config/nginx/strong-ssl.conf;
-  include /etc/nginx/config/cloudflare.conf;
-  include /etc/nginx/config/proxy.conf;
+	include /etc/nginx/strong-ssl.conf;
+  include /etc/nginx/cloudflare.conf;
+  include /etc/nginx/proxy.conf;
 
   location / {
     proxy_pass http://10.10.0.15:3000/;

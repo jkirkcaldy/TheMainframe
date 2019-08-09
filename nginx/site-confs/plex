@@ -11,12 +11,12 @@ server {
 	server_name plex.themainframe.co.uk;
 
 	#SSL settings
-	include /config/nginx/strong-ssl.conf;
+	include /etc/nginx/strong-ssl.conf;
 
-	include /etc/nginx/config/cloudflare.conf;
+	include /etc/nginx/cloudflare.conf;
 
 	#Organizr auth
-	include /config/nginx/serverauth-V2.conf; #For server-auth with Organizr, remove unless you use Organizr.
+	include /etc/nginx/serverauth-V2.conf; #For server-auth with Organizr, remove unless you use Organizr.
 
 	location / {
 

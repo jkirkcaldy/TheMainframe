@@ -18,23 +18,23 @@ server {
 	server_name sso.themainframe.co.uk;
 
 	#SSL settings
-	include /config/nginx/strong-ssl.conf;
+	include /etc/nginx/strong-ssl.conf;
 
 	#Maxmind geoblock
-	include /config/nginx/geoblock.conf;
+	include /etc/nginx/geoblock.conf;
 
 	#Custom error pages
-	include /config/nginx/errorpages.conf;
+	include /etc/nginx/errorpages.conf;
 
 	#Organizr auth
-	include /config/nginx/serverauth.conf;
+	include /etc/nginx/serverauth.conf;
 
 	#Organizr container
-	include /config/nginx/root.conf;
+	include /etc/nginx/root.conf;
 
-  include /etc/nginx/config/cloudflare.conf;
+  include /etc/nginx/cloudflare.conf;
 ################################################################################################################
 #////////////////////////////////////////////////SUBDIRECTORIES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
 ################################################################################################################
-	include /config/nginx/subdirs/*.conf;
+	include /etc/nginx/subdirs/*.conf;
 }

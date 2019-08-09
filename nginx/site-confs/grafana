@@ -6,15 +6,15 @@ server {
 server {
 	listen 443 ssl;
 	server_name grafana.themainframe.co.uk;
-	include /config/nginx/proxy.conf;
+	include /etc/nginx/proxy.conf;
 #SSL settings
-	include /config/nginx/strong-ssl.conf;
+	include /etc/nginx/strong-ssl.conf;
 #Organizr auth
-	include /config/nginx/serverauth-V2.conf; #For server-auth with Organizr, remove unless you use Organizr.
+	include /etc/nginx/serverauth-V2.conf; #For server-auth with Organizr, remove unless you use Organizr.
 #Maxmind geoblock
-	include /config/nginx/geoblock.conf;
+	include /etc/nginx/geoblock.conf;
 
-	include /etc/nginx/config/cloudflare.conf;
+	include /etc/nginx/cloudflare.conf;
 location / {
         auth_request /auth-4; #For server-auth with Organizr, remove unless you use Organizr.
 	proxy_pass http://10.10.0.12:3000;
