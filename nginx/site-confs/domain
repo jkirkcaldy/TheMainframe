@@ -4,7 +4,6 @@
 # REDIRECT TRAFFIC FROM www.themainframe.co.uk TO https://themainframe.co.uk
 server {
  	listen 80;
-	listen 443 ssl http2;
  	server_name sso.themainframe.co.uk;
  	return 301 https://sso.themainframe.co.uk$request_uri;
 }
@@ -32,12 +31,11 @@ server {
 	#Organizr container
 	include /etc/nginx/root.conf;
 
-        include /etc/nginx/cloudflare.conf;
+  include /etc/nginx/cloudflare.conf;
 ################################################################################################################
 #////////////////////////////////////////////////SUBDIRECTORIES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
 ################################################################################################################
 	include /etc/nginx/subdirs/*.conf;
-
 
 
 }
