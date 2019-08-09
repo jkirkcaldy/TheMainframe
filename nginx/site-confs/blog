@@ -1,11 +1,3 @@
-# BLOG REDIRECT TRAFFIC ON WWW TO https://[domain.com]
-server {
- 	listen 80;
-	listen 443 ssl http2;
- 	server_name www.themainframe.co.uk;
- 	return 301 https://sso.themainframe.co.uk$request_uri;
-}
-
 # REDIRECT HTTP TRAFFIC TO https://[domain.com]
 server {
  	listen 80;
