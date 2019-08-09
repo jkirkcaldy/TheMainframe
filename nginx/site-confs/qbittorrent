@@ -8,11 +8,11 @@ server {
 listen 443 ssl http2;
 	server_name qbit.themainframe.co.uk;
 #SSL settings
-	include /etc/nginx/strong-ssl.conf;
+	include /etc/nginx/config/strong-ssl.conf;
 #Organizr auth
-	include /etc/nginx/serverauth-V2.conf;
+	include /etc/nginx/config/serverauth-V2.conf;
 
-	include /etc/nginx/cloudflare.conf;
+	include /etc/nginx/config/cloudflare.conf;
 location / {
     auth_request /auth-0;
     proxy_pass  http://10.10.0.11:9090;

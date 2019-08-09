@@ -10,13 +10,13 @@ server {
 	server_name sso.themainframe.co.uk;
 
 #SSL settings
-	include /etc/nginx/ssl.conf;
-  include /etc/nginx/cloudflare.conf;
-  include /etc/nginx/proxy.conf;
-  include /etc/nginx/geoblock.conf;
-  include /etc/nginx/errorpages.conf;
-  include /etc/nginx/serverauth.conf;
-  include /etc/nginx/subdirs/*.conf;
+	include /etc/nginx/config/ssl.conf;
+  include /etc/nginx/config/cloudflare.conf;
+  include /etc/nginx/config/proxy.conf;
+  include /etc/nginx/config/geoblock.conf;
+  include /etc/nginx/config/errorpages.conf;
+  include /etc/nginx/config/serverauth.conf;
+  include /etc/nginx/config/subdirs/*.conf;
 
   location / {
     proxy_pass http://192.168.1.249:9983/;

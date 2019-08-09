@@ -9,9 +9,9 @@ server {
 	server_name news.themainframe.co.uk;
 
 	# SSL settings
-	include /etc/nginx/ssl.conf;
+	include /etc/nginx/config/ssl.conf;
 
-  include /etc/nginx/cloudflare.conf;
+  include /etc/nginx/config/cloudflare.conf;
 
 location / {
 	return 444;
@@ -23,7 +23,7 @@ location /tautulli/newsletter {
 	proxy_bind $server_addr;
 	proxy_set_header X-Forwarded-Host $server_name;
 	proxy_set_header X-Forwarded-Ssl on;
-	include /etc/nginx/proxy.conf;
+	include /etc/nginx/config/proxy.conf;
     }
 
 # TAUTULLI ALLOW SELFHOSTED IMAGES
@@ -32,6 +32,6 @@ location /tautulli/image {
 	proxy_bind $server_addr;
         proxy_set_header X-Forwarded-Host $server_name;
 	proxy_set_header X-Forwarded-Ssl on;
-	include /etc/nginx/proxy.conf;
+	include /etc/nginx/config/proxy.conf;
     }
 }
