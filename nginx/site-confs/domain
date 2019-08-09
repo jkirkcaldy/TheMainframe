@@ -15,25 +15,36 @@ server  {
 ################################################################################################################
 #////////////////////////////////////////////////MAIN SERVER BLOCK\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
 ################################################################################################################
+
 server {
 	listen 443 ssl default_server;
-	server_name sso.themainframe.co.uk;
+        listen [::]:443 ssl default_server;
+  server_name sso.themainframe.co.uk;
 
-	#SSL settings
+# Organizr
+  location  / {
+    proxy_pass  http://192.168.1.249:9983/;
+  }
+
+#server {
+#	listen 443 ssl default_server;
+#	server_name sso.themainframe.co.uk;
+#
+#	#SSL settings
 	include /etc/nginx/strong-ssl.conf;
-
-	#Maxmind geoblock
+#
+#	#Maxmind geoblock
 	include /etc/nginx/geoblock.conf;
-
-	#Custom error pages
+#
+#	#Custom error pages
 	include /etc/nginx/errorpages.conf;
-
-	#Organizr auth
+#
+#	#Organizr auth
 	include /etc/nginx/serverauth.conf;
-
-	#Organizr container
-	include /etc/nginx/root.conf;
-
+#
+#	#Organizr container
+#	include /etc/nginx/root.conf;
+#
   include /etc/nginx/cloudflare.conf;
 ################################################################################################################
 #////////////////////////////////////////////////SUBDIRECTORIES\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\#
