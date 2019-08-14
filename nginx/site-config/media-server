@@ -14,7 +14,7 @@ server {
   error_log /var/log/nginx/media-error.log;
 
   include /etc/nginx/config/errorpages.conf;
-  include /etc/nginx/config/strong-ssl.conf;
+  include /etc/nginx/config/sub-strong-ssl.conf;
   include /etc/nginx/config/cloudflare.conf;
   include /etc/nginx/config/proxy.conf;
 
@@ -211,14 +211,14 @@ if ($http_referer ~* /plex/) {
 
 # REDIRECT HTTP TRAFFIC TO https://[themainframe.co.uk]
 server {
-	listen 10.10.0.253:80;
+	listen 80;
 	server_name PLEX.themainframe.co.uk;
 	return 301 https://$server_name$request_uri;
 	}
 
 # PLEX SERVER
 server {
-	listen 10.10.0.253:443 ssl http2;
+	listen 443 ssl http2;
 	server_name plex.themainframe.co.uk;
 
 	#SSL settings
@@ -259,7 +259,7 @@ server {
 
 ######################### PLPP ########################
 server {
-        listen 10.10.0.253:80;
+        listen 80;
     if ($host = plpp.themainframe.co.uk) {
         return 301 https://$host$request_uri;
     }
@@ -268,7 +268,7 @@ server {
 }
 
 server {
-        listen 10.10.0.253:443 ssl http2;
+        listen 443 ssl http2;
   server_name plpp.themainframe.co.uk;
   access_log /var/log/nginx/media-access.log;
   error_log /var/log/nginx/media-error.log;
@@ -292,7 +292,7 @@ server {
   }
 ######################### qbitorrent ########################
 server {
-        listen 10.10.0.253:80;
+        listen 80;
 
 
     if ($host = qbit.themainframe.co.uk) {
@@ -304,7 +304,7 @@ server {
 
 
 server {
-	listen 10.10.0.253:443 ssl http2;
+	listen 443 ssl http2;
   server_name qbit.themainframe.co.uk;
   access_log /var/log/nginx/media-access.log;
   error_log /var/log/nginx/media-error.log;
@@ -322,12 +322,12 @@ server {
 ######################### Newsletter ########################
 
 server {
- 	listen 10.10.0.253:80;
+ 	listen 80;
  	server_name news.themainframe.co.uk;
  	return 301 https://$server_name$request_uri;
 }
 server {
-	listen 10.10.0.253:443 ssl http2;
+	listen 443 ssl http2;
 	server_name news.themainframe.co.uk;
 
 	# SSL settings
