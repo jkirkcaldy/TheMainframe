@@ -107,28 +107,7 @@ server {
 
 
 }
-######################### PORTAINER ###########################
-server  {
-  listen  80;
-  server_name  portainer.themainframe.co.uk;
-    if ($host = portainer.themainframe.co.uk) {
-        return 301 https://$host$request_uri;
-    }
-  return 301 https://$host$request_uri;
-}
-server {
-        listen 443;
-  server_name portainer.themainframe.co.uk;
-  access_log /var/log/nginx/media-access.log;
-  error_log /var/log/nginx/media-error.log;
-  include /etc/nginx/config/cloudflare.conf;
-  include /etc/nginx/config/proxy.conf;
-  include /etc/nginx/config/sub-strong-ssl.conf;
-  include /etc/nginx/config/errorpages.conf;
-  location  / {
-    proxy_pass  http://192.168.1.249:9000/;
-  }
-}
+
 ########################## PYLOAD ###########################
 server  {
   listen  80;

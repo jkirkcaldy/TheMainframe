@@ -14,7 +14,7 @@ server {
         listen 10.10.0.253:443 ssl http2;
         server_name mail.themainframe.co.uk;
         return 444;
-        include /etc/nginx/config/sub-stong-ssl.conf;
+        include /etc/nginx/config/sub-strong-ssl.conf;
         include /etc/nginx/config/proxy.conf;
         include /etc/nginx/config/cloudflare.conf;
 
