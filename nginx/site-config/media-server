@@ -1,5 +1,5 @@
 server {
-        listen 10.10.0.253:80;
+        listen 80;
     if ($host = sso.themainframe.co.uk) {
         return 301 https://$host$request_uri;
     }
@@ -8,7 +8,7 @@ server {
 }
 
 server {
-	listen 10.10.0.253:443 ssl http2 default_server;
+	listen 443 ssl http2 default_server;
   server_name sso.themainframe.co.uk;
   access_log /var/log/nginx/media-access.log;
   error_log /var/log/nginx/media-error.log;
@@ -18,7 +18,7 @@ server {
   include /etc/nginx/config/cloudflare.conf;
   include /etc/nginx/config/proxy.conf;
 
-  return 444;
+
 
 location ~ /auth-(.*) {
 	internal;
@@ -275,7 +275,7 @@ server {
   include /etc/nginx/config/errorpages.conf;
   include /etc/nginx/config/sub-strong-ssl.conf;
 
-  return 444;
+
 
 # plpp
   location  / {
@@ -313,7 +313,6 @@ server {
   include /etc/nginx/config/cloudflare.conf;
   include /etc/nginx/config/proxy.conf;
 
-  return 444;
 
   location / {
     proxy_pass http://10.10.0.11:9090;
@@ -336,7 +335,7 @@ server {
   include /etc/nginx/config/cloudflare.conf;
 
 location / {
-	return 444;
+  return 444;
 	}
 
 # TAUTULLI ALLOW SELFHOSTED NEWSLETTER
