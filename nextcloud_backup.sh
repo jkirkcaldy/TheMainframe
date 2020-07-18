@@ -41,7 +41,7 @@ date +'%a %b %e %H:%M:%S %Z %Y'
 # Put NextCloud into maintenance mode. 
 # This ensures consistency between the database and data directory.
 
-sudo -u abc php $nextcloud_dir/occ maintenance:mode --on
+docker exec nextcloud /bin/sh -c "sudo -u abc php config/www/nextcloud/occ maintenance:mode --on" > /dev/null
 
 # Dump database and backup to S3
 
@@ -58,7 +58,7 @@ s3cmd sync --recursive --preserve --exclude '*/cache/*' $data_dir s3://$s3_bucke
 # If upload cache for all users is stored directly as an immediate subdirectory of the data directory
 # s3cmd sync --recursive --preserve --exclude 'cache/*' $data_dir s3://$s3_bucket/
 
-sudo -u www-data php $nextcloud_dir/occ maintenance:mode --off
+docker exec nextcloud /bin/sh -c "sudo -u abc php config/www/nextcloud/occ maintenance:mode --off" > /dev/null
 
 date +'%a %b %e %H:%M:%S %Z %Y'
 echo 'Finished'
